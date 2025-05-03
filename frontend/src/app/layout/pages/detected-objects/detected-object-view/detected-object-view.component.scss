@@ -1,0 +1,22 @@
+$square-size: 24px;
+
+.square {
+  width: $square-size;
+  height: $square-size;
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.legend {
+  margin-left: 5px;
+}
+
+.legend-wrapper {
+  margin-top: 3px;
+}

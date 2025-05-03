@@ -1,0 +1,24 @@
+<main>
+  <header class="p-3 mb-3 border-bottom">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link ps-0 link-secondary" routerLink="/detected-objects/">Erkannte Objekte</a></li>
+          <li><a href="#" class="nav-link ps-0 link-secondary" routerLink="/operation-sections/">Einsatzabschnitte</a></li>
+        </ul>
+
+        <div class="dropdown text-end" placement="bottom-start" display="static" ngbDropdown>
+          <a class="d-block link-body-emphasis text-decoration-none dropdown-toggle cursor-pointer" ngbDropdownToggle>
+            {{ localStorage.getUsername() }}
+          </a>
+          <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+            <button ngbDropdownItem (click)="logout()">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>

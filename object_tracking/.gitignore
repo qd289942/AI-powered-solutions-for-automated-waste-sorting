@@ -1,0 +1,9 @@
+frame/**/*.jpg
+tracking/**/*.jpg
+detection/**/*.jpg
+video/*
+end_results/*.*
+yolov5
+yolov5s.pt
+wip_aligned/*.pt
+.idea

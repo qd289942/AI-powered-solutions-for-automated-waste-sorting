@@ -1,0 +1,40 @@
+<div>
+  <div class="float-start"><h3>Einsatzabschnitte - Übersicht</h3></div>
+  <div class="float-end">
+    <button class="btn btn-success" (click)="navigateToCreate()" appAdminOnly>Neuer Einsatzabschnitt</button>
+  </div>
+</div>
+<table class="table" *ngIf="operationSections">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">KI-Modell</th>
+    <th scope="col">Anzahl Aktoren</th>
+    <th scope="col">Laufbandgeschwindigkeit (mm / s)</th>
+    <th scope="col">X-Schwelle (mm)</th>
+    <th scope="col">Aktionen</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let operationSection of operationSections">
+    <td>{{operationSection.operationSectionId}}</td>
+    <td>{{operationSection.name}}</td>
+    <td><span class="badge bg-secondary">{{operationSection.ai.name}}</span></td>
+    <td>{{operationSection.actuators.length}}</td>
+    <td>{{operationSection.conveyerSpeed}}</td>
+    <td>{{operationSection.cameraXThreshold}}</td>
+    <td class="action-buttons">
+      <button class="btn btn-sm btn-info" routerLink="/operation-sections/view/{{operationSection.operationSectionId}}">
+        <fa-icon [icon]="faEye"></fa-icon>
+      </button>
+      <button appAdminOnly class="btn btn-sm btn-warning" (click)="navigateToEdit(operationSection)">
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+      <button class="btn btn-sm btn-danger" (click)="askDelete(operationSection)" appAdminOnly>
+        <fa-icon [icon]="faRemove"></fa-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

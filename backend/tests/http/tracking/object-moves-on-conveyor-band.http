@@ -1,0 +1,143 @@
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0098.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0098.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0148.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0123.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0148.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0173.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0148.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0198.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0148.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0123.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0148.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0222.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0148.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0248.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0148.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0273.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST /object-detection/detect HTTP/1.1
+Host: localhost:3000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_file"; filename="frame_0148.jpg"
+Content-Type: image/jpeg
+
+< ./img/frame_0289.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="operationSectionId"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

@@ -1,0 +1,6 @@
+FROM ubuntu:jammy
+
+RUN apt-get update && apt install python3-pip ffmpeg libsm6 libxext6 -y && pip install ultralytics
+WORKDIR /app
+
+ENTRYPOINT [ "yolo",  "export", "model=detection.pt", "format=tfjs" ]

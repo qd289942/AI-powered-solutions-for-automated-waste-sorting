@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Actuator</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Socket.IO Actuator</h1>
+    <label for="actuator1">Actuator 1</label>
+    <input type="radio" name="actuator" id="actuator1" value="1">
+    <script>
+        const actuator1 = document.getElementById('actuator1');
+        
+   
+        /*  
+            Hier können wir ggf. noch einen Kamera Prefix einbauen, sodass man sich speziell auf die Events
+            einer Kamera subscriben kann.
+        */
+        const socket = io();
+
+        /*
+            The action Data will be an JSON-Object with the following structure:
+            {
+                camera: {
+                    cameraId: "1",
+                    name: "Camera 1"
+                },
+                detectedObjects: DetectedObject[],
+                timestamp: number
+            }
+
+        */
+        socket.on('trash_detected', function(data) {
+            console.log("Got action signal from server: ", data);
+            actuator1.checked = true;
+
+            setTimeout(() => {
+                actuator1.checked = false;
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+FROM ubuntu:jammy
+
+RUN apt-get update && \
+    apt install python3-pip ffmpeg libsm6 libxext6 -y 
+
+RUN pip install "ultralytics"
+
+RUN pip install "tensorflow-cpu>=2.0.0" "tf_keras" \
+    "onnx>=1.12.0" "onnx2tf>1.17.5,<=1.22.3" "sng4onnx>=1.0.1" \
+    "onnxslim>=0.1.31" "onnx_graphsurgeon>=0.3.26" "tflite_support" \
+    "onnxruntime" "tensorflowjs==4.20.0"
+
+WORKDIR /app
+
+ENTRYPOINT [ "yolo",  "export", "model=detection.pt", "format=tfjs" ]

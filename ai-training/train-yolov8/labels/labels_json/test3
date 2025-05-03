@@ -1,0 +1,68 @@
+{
+  "id": 8,
+  "created_username": " wangkuan42@gmail.com, 1",
+  "created_ago": "3\u00a0days, 12\u00a0hours",
+  "completed_by": {
+    "id": 1,
+    "first_name": "",
+    "last_name": "",
+    "email": "wangkuan42@gmail.com"
+  },
+  "task": {
+    "id": 8,
+    "data": {
+      "image": "/data/local-files/?d=Garbage_classification%5Ctrain%5Ccardboard%5Ccardboard102.jpg"
+    },
+    "meta": {},
+    "created_at": "2024-06-04T13:31:23.480274Z",
+    "updated_at": "2024-06-04T18:59:31.935020Z",
+    "is_labeled": true,
+    "overlap": 1,
+    "inner_id": 3,
+    "total_annotations": 1,
+    "cancelled_annotations": 0,
+    "total_predictions": 0,
+    "comment_count": 0,
+    "unresolved_comment_count": 0,
+    "last_comment_updated_at": null,
+    "project": 1,
+    "updated_by": 1,
+    "file_upload": null,
+    "comment_authors": []
+  },
+  "result": [
+    {
+      "original_width": 512,
+      "original_height": 384,
+      "image_rotation": 0,
+      "value": {
+        "x": 1.0338345864661653,
+        "y": 0.6265664160401002,
+        "width": 97.27443609022556,
+        "height": 98.37092731829573,
+        "rotation": 0,
+        "rectanglelabels": [
+          "cardboard"
+        ]
+      },
+      "id": "ed0Ry3r9OT",
+      "from_name": "label",
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "origin": "manual"
+    }
+  ],
+  "was_cancelled": false,
+  "ground_truth": false,
+  "created_at": "2024-06-04T18:59:31.900121Z",
+  "updated_at": "2024-06-04T18:59:31.900121Z",
+  "draft_created_at": null,
+  "lead_time": 6.386,
+  "import_id": null,
+  "last_action": null,
+  "project": 1,
+  "updated_by": 1,
+  "parent_prediction": null,
+  "parent_annotation": null,
+  "last_created_by": null
+}

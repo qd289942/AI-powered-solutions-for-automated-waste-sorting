@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <video autoplay width="640" height="640"></video>
+        <canvas id="c" width="640" height="640" class=""></canvas>
+    <script>
+
+       
+        const constraints = {
+            video: {
+                width: 640,
+                height: 640
+                
+            },
+            facingMode: { exact: "environment" },
+        };
+        
+        const video = document.querySelector('video');
+       async function startVideo() {
+            navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+                video.srcObject = stream;
+            
+                const draw = async () => {
+                    ctx.drawImage(video, 0, 0, 640, 640);
+                    
+                    canvas.toBlob(async (blob) => {
+                            const data = new FormData();
+                            data.append("image_file",blob,"image_file");
+                            await fetch(`/image/`,{
+                                method:"post",
+                                body:data
+                            });
+                        }, "image/jpeg", 0.95);
+
+                    
+                    //requestAnimationFrame(draw);
+                }
+
+                setInterval(() => draw(), 1000);
+                //requestAnimationFrame(draw);    
+            }).catch((error) => {
+                console.error('Error accessing media devices.', error);
+            });
+        }
+
+        
+        
+        const canvas = document.getElementById('c');
+        const ctx = canvas.getContext('2d');
+        startVideo();
+
+       
+    </script>
+</body>
+</html>

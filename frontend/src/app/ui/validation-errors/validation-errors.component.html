@@ -1,0 +1,17 @@
+<div *ngIf="control?.touched">
+  <div class="invalid-feedback" *ngIf="control?.errors?.['required']">
+    Dieses Feld ist ein Pflichtfeld
+  </div>
+  <div class="invalid-feedback" *ngIf="control?.errors?.['duplicateActivationLabels']">
+    Jedes Aktivierungslabel kann nur einmal einem Aktor pro Einsatzabschnitt zugeordnet werden
+  </div>
+  <div class="invalid-feedback" *ngIf="control?.errors?.['min']">
+    Dieser Wert muss mindestens {{control!.errors?.['min'].min}} betragen
+  </div>
+  <div class="invalid-feedback" *ngIf="control?.errors?.['max']">
+    Dieser Wert darf maximal {{control!.errors?.['max'].max}} betragen
+  </div>
+  <div class="invalid-feedback" *ngIf="control?.errors?.['operationSectionNameTaken']">
+    Dieser Name wurde bereits vergeben, bitte wählen Sie einen anderen Namen.
+  </div>
+</div>

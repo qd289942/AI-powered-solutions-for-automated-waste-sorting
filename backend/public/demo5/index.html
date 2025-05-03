@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Actuator</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Socket.IO Actuator</h1>
+    <div><span>Operation Section: </span><span id="operationSection"></span></div>
+    <div id="actuatorBlock" style="display: flex; flex-direction: column; max-width: 300px;"></div>
+
+    <script>
+        
+
+
+        // Example POST method implementation:
+        async function postData(url = "", data = {}) {
+            // Default options are marked with *
+            const response = await fetch(url, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, *same-origin, omit
+                headers: {
+                "Content-Type": "application/json",
+                authorization: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzIxMjM1NzcxfQ.EwMd7QQZUOEAteHzw27nGxAzNtALuPJOinV1zpWiDz7XLIit40kAEA4sPrEpKD5PhwEHv-lfh2dhKGRBplefNtCyuinrAd3d-loaF21GVD4ba-5ykXgqad0u3sTZIcJDBn19m01fa6nS2ClkEXOTd5seyxbAfuUeC5PBQEaVdl8rVg5edZLXizoix2tuGy1CTmrNRIF7X-5rEiNmga0l14Zf46ulVe7O9ssnNYh9ElWX7P30tYRFH_dJgxtEHBMcM5qu3levI1Gouh0VY5bO2SHIV_Q5XtXPRkksFNOJbeDDNmkfzrY2WGT8UvzSMcZkkAxHeEpkf45v8BauxkNfqeQfSNex0gdPB7fAtOSjfp01UOT6LjIbwQUPGiki65V0D7UhVor19ebUlkJMPbjnQdtUPNN4TyKgr-0fOAG-4w7WC9aocQy51FsOcRt-MYcpjSs_2sp67Kirv5rv3-FatT_v054QkNRSwFsZ2zcpav55eIyJVeYuOq1L-o74Te3T2mnHQQ2ez7xPQJniR1iscoo1fzK-PxdvEc6WrsGVea9x9Q6N-OfVuSXfpAEqD0yGki785kh4wQKNh-JkuUmmiBMY-lmyXwIZKdxVSpQnv7zfAynfafzazIle-A27fi0_nmW38Y6_3QJaCngUbcpQBDxMVdZaC56RbmOFAaGBsyI"
+        
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
+
+        async function init() {
+
+            const res =  await fetch('http://localhost:3000/ai/')
+            const ais = await res.json()
+            const yoloRemote = ais.find(ai => ai.name === 'YoloV8_detection_v3_remote')
+
+            const oeprationSectionToInsert = {
+                                    "name": "socket_io_multiple_actuator",
+                                    "conveyerSpeed": 2072.4,
+                                    "cameraXThreshold": 50,
+                                    "detectionMinThreshold": 0.6,
+                                    "cameraPictureWidthMm": 180,
+                                    "aiId": yoloRemote.aiId,
+                                    "actuators": [
+                                        {
+                                        "name": "Actuator1",
+                                        "cameraDistance": 130,
+                                        "type": "COMPRESSED_AIR",
+                                        "activationTrashLabel": [ "plastic" ]
+                                        },
+                                        {
+                                        "name": "Actuator2",
+                                        "cameraDistance": 340,
+                                        "type": "COMPRESSED_AIR",
+                                        "activationTrashLabel": [ "metal" ]
+                                        }
+                                    ]
+                                }
+
+                                        // check if it already exists
+            fetch(`http://localhost:3000/operation-sections?name=socket_io_multiple_actuator`).then(async (response) => {
+                const operationSection = await response.json();
+                console.log(operationSection);
+                handleResponse(operationSection)
+            }).catch((error) => {
+                postData("http://localhost:3000/operation-sections", oeprationSectionToInsert).then(async (response) => {
+                handleResponse(response)
+            })});
+        }
+
+        
+        
+        function handleResponse(operationSection) {
+            
+                /*
+
+                    Example Respone of a Operation Section 
+                    {
+                        "operationSectionId": 15,
+                        "name": "test1",
+                        "conveyerSpeed": 15,
+                        "cameraXThreshold": 50,
+                        "aiId": 3,
+                        "actuators": [
+                            {
+                                "actuatorId": 20,
+                                "name": "Actuator1",
+                                "type": "COMPRESSED_AIR",
+                                "cameraDistance": 50,
+                                "activationTrashLabel": [
+                                    "metal"
+                                ],
+                                "operationSectionId": 15
+                            },
+                            {
+                                "actuatorId": 21,
+                                "name": "Actuator2",
+                                "type": "COMPRESSED_AIR",
+                                "cameraDistance": 75,
+                                "activationTrashLabel": [
+                                    "Plastic"
+                                ],
+                                "operationSectionId": 15
+                            }
+                        ]
+                        }
+                */
+
+                /*  
+                    Hier können wir ggf. noch einen Kamera Prefix einbauen, sodass man sich speziell auf die Events
+                    einer Kamera subscriben kann.
+                */
+                const socket = io();
+
+                console.log(operationSection.actuators);
+                const actuatorBlock = document.getElementById('actuatorBlock')
+                const osDiv = document.getElementById('operationSection')
+                osDiv.innerText = operationSection.operationSectionId;
+                operationSection.actuators.forEach(actuator => {
+                    
+                    const actuatorHTML = 
+                            `<div><label for="actuator${actuator.actuatorId}">Actuator ${actuator.actuatorId}</label>
+                            <input type="radio" id="${actuator.actuatorId}" value="${actuator.actuatorId}">${actuator.activationTrashLabel}</div>`
+                        
+                        
+                        const template = document.createElement('template');
+                        template.innerHTML = actuatorHTML;
+                        const result = template.content.children
+                        console.log(...result);
+                        actuatorBlock.append(...result)
+
+                    socket.on(`trash_detected/${actuator.actuatorId}`, function(detectionData) {
+                        console.log(`Got action signal from server for actuator ${actuator.actuatorId}}]`, detectionData);
+                        
+                        const htmlActuator = document.getElementById(actuator.actuatorId);
+                        htmlActuator.checked = true;
+
+                        //signal duration
+                        setTimeout(() => {
+                            htmlActuator.checked = false;
+                        }, 3000);
+                    });
+                });
+               
+        }
+
+        init();
+        
+
+     
+    </script>
+</body>
+</html>

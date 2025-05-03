@@ -1,0 +1,19 @@
+# Use a lightweight Python image
+FROM python:3.9-slim
+
+# Install necessary system libraries
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0
+
+# Install necessary Python packages
+RUN pip install ultralytics onnx
+
+# Copy the script to export the model to ONNX
+COPY export_to_onnx.py /app/export_to_onnx.py
+
+# Set the working directory
+WORKDIR /app
+
+# Command to run the script
+ENTRYPOINT ["python", "export_to_onnx.py"]

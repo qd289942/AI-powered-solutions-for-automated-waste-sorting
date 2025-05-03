@@ -1,0 +1,4 @@
+<div *ngIf="operationSection">
+  <h3>Einsatzabschnitt bearbeiten: {{operationSection.name}}</h3>
+  <app-operation-section-form [saveCallback]="getSaveCallback()" [operationSectionFormPreFill]="operationSection"></app-operation-section-form>
+</div>

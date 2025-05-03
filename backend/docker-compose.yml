@@ -1,0 +1,69 @@
+
+services:
+  db:
+    image: mysql:8.4.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'trashDetectionDB'
+      MYSQL_USER: 'dbUserTashDetection'
+      MYSQL_PASSWORD: 'kcRs8BBrC@po$$VDHTrU'
+      MYSQL_ROOT_PASSWORD: 'm4v^V*UWXpr^v34yV3PK'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - trashDetectionDB:/var/lib/mysql
+
+  elasticsearch:
+    image: elasticsearch:7.17.14
+    ports:
+      - "127.0.0.1:9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - transport.publish_host=0.0.0.0
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "discovery.type=single-node"
+
+  kibana:
+    image: kibana:7.17.14
+    ports:
+      - 127.0.0.1:5601:5601
+    depends_on:
+      - elasticsearch
+    environment:
+      - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+
+
+  # yolov8_remote:
+  #   build:
+  #     context: ../yolo-container/
+  #     dockerfile: ../yolo-container/dockerfile.min
+  #   ports:
+  #     - 127.0.0.1:8080:8080
+  #   restart: always
+
+  yolov8_remote:
+    build:
+      context: ../yolo-container/
+      dockerfile: ../yolo-container/dockerfile.min
+    ports:
+      - 127.0.0.1:8080:8080
+    restart: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  trashDetectionDB:
+  esdata:
+    driver: local
+
+

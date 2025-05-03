@@ -1,0 +1,43 @@
+<table class="table" *ngIf="detectedObjectSummaries">
+  <thead>
+  <tr>
+    <th scope="col">Tracking-ID</th>
+    <th scope="col">Mehrheits-Klassifizierung</th>
+    <th scope="col">Durchschnittliche Konfidenz</th>
+    <th scope="col">Erste Erkennung</th>
+    <th scope="col">Letzte Erkennung</th>
+    <th scope="col">Aktionen</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let detectedObjectSummary of detectedObjectSummaries">
+    <th scope="row">{{ detectedObjectSummary.key }}</th>
+    <th><span class="badge bg-secondary">{{ detectedObjectSummary.most_common_class.buckets[0].key }}
+      ({{ detectedObjectSummary.most_common_class.buckets[0].doc_count }})</span></th>
+    <td>{{ detectedObjectSummary.average_detection_certainty.value | number:'1.4-4' }}</td>
+    <td>{{ detectedObjectSummary.first_detection.value | europeanDatetime }}</td>
+    <td>{{ detectedObjectSummary.last_detection.value | europeanDatetime }}</td>
+    <td>
+      <button class="btn btn-sm btn-info" routerLink="/detected-objects/{{detectedObjectSummary.key}}">
+        <fa-icon [icon]="faEye"></fa-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div *ngIf="totalCount">
+  <div class="float-end">
+    <div class="float-end ms-3">
+    <ngb-pagination
+      [collectionSize]="totalCount"
+      [pageSize]="perPage"
+      [(page)]="page"
+      [maxSize]="10"
+      [rotate]="true"
+      [ellipses]="false"
+      [boundaryLinks]="true"/>
+    </div>
+    <div class="float-end mt-2">Zeige {{ (page - 1) * perPage + 1 }} bis {{ (page - 1) * perPage + detectedObjectSummaries.length }} von {{totalCount}} </div>
+  </div>
+</div>
+

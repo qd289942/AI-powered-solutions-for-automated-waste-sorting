@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperationSection</title>
+</head>
+
+<style>
+    .space-between {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+<body>
+
+    <h1 style="color: red"> DERZEIT NICHT FUNKTIONSFÄHIG!</h1>
+    <h1>Create Operation Section</h1>
+    <form id="form" method="post" action="/operation-sections" style="display: flex; flex-direction: column; gap: 1rem; justify-items: space-between; max-width: 400px;">
+        <operationSection>
+        <label class="space-between" >Operation Section Name: <input type="text" name="name" /></label>
+        <label class="space-between">Conveyer Speed [cm/s]: <input type="number" name="conveyerSpeed" value=2072.4 /></label>
+        <label class="space-between">Camera-X-Threshold: <input type="number" name="cameraXThreshold" value=50 /></label>
+        <label class="space-between">Detection min. Threshold (0-1): <input type="number" min=0 max=1 step=0.05 name="detectionMinThreshold" value=0.5 /></label>
+        <label class="space-between">Select Model<select id="modelSelect" name="aiId">
+        </select></label>
+        </operationSection>
+        <div id="acutatorBlock" style="display: flex; flex-direction: column;">
+
+        </div> <button type="button" onclick="addActuator()">Add Actuator</button>
+        <button id="submit" type="submit" >Submit</button>
+    </form>
+
+   
+    
+    <script>
+        const form = document.getElementById('form')
+        const submitButton = document.getElementById('submit')
+       
+
+        async function submit(event) {
+            event.preventDefault()
+        
+            //const operationSection = Object.fromEntries(data.entries())
+            const operationSectionTag = document.getElementsByTagName('operationSection')[0]
+            const operationSectionInputs = operationSectionTag.getElementsByTagName('input')
+            const operationSection = {
+                name: operationSectionInputs.name.value,
+                conveyerSpeed: operationSectionInputs.conveyerSpeed.value,
+                cameraXThreshold: operationSectionInputs.cameraXThreshold.value,
+                detectionMinThreshold: operationSectionInputs.detectionMinThreshold.value,
+                aiId: operationSectionTag.getElementsByTagName('select')[0].value
+            }
+          
+            const actuators = document.getElementsByTagName('actuator')
+
+            const actuatorData = [];
+            
+            for(const actuator of actuators) {
+                const inputElements = actuator.getElementsByTagName('input')
+                const selectElements = actuator.getElementsByTagName('select')
+
+                const cameraDistance = inputElements.cameraDistance.value
+                const name = inputElements.name.value
+
+                const activationTrashLabel = selectElements.activationTrashLabel.value
+                const type = selectElements.type.value
+                const actuatorCalibration = inputElements.actuatorCalibration.value
+
+                actuatorData.push({cameraDistance, name, activationTrashLabel, actuatorCalibration, type});
+            };
+            console.log(actuatorData);  
+
+            operationSection.actuators = actuatorData
+           
+            await fetch("/operation-sections/", {
+                method:"post",
+                headers: {
+                    //"Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7Hp2HdBDdrmOBiyf",
+                    "authorization": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzIxMjM1NzcxfQ.EwMd7QQZUOEAteHzw27nGxAzNtALuPJOinV1zpWiDz7XLIit40kAEA4sPrEpKD5PhwEHv-lfh2dhKGRBplefNtCyuinrAd3d-loaF21GVD4ba-5ykXgqad0u3sTZIcJDBn19m01fa6nS2ClkEXOTd5seyxbAfuUeC5PBQEaVdl8rVg5edZLXizoix2tuGy1CTmrNRIF7X-5rEiNmga0l14Zf46ulVe7O9ssnNYh9ElWX7P30tYRFH_dJgxtEHBMcM5qu3levI1Gouh0VY5bO2SHIV_Q5XtXPRkksFNOJbeDDNmkfzrY2WGT8UvzSMcZkkAxHeEpkf45v8BauxkNfqeQfSNex0gdPB7fAtOSjfp01UOT6LjIbwQUPGiki65V0D7UhVor19ebUlkJMPbjnQdtUPNN4TyKgr-0fOAG-4w7WC9aocQy51FsOcRt-MYcpjSs_2sp67Kirv5rv3-FatT_v054QkNRSwFsZ2zcpav55eIyJVeYuOq1L-o74Te3T2mnHQQ2ez7xPQJniR1iscoo1fzK-PxdvEc6WrsGVea9x9Q6N-OfVuSXfpAEqD0yGki785kh4wQKNh-JkuUmmiBMY-lmyXwIZKdxVSpQnv7zfAynfafzazIle-A27fi0_nmW38Y6_3QJaCngUbcpQBDxMVdZaC56RbmOFAaGBsyI",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(operationSection)
+            });
+
+            
+        }
+
+        form.addEventListener('submit', submit)
+          // Fetch available models from backend
+        const select = document.getElementById("modelSelect");
+        fetch("/object-detection/").then(response => response.json()).then(models => {
+            models.forEach(model => {
+                const option = document.createElement("option");
+                option.value = model.aiIndex;
+                option.text = model.aiName;
+                select.appendChild(option);
+            });
+
+            select.value = models[0].aiIndex;
+        });
+
+
+        let actuatorCnt = 1
+        const acutatorBlock = document.getElementById('acutatorBlock')
+        const addActuator = () => {
+           
+
+            const actuator =
+            `<actuator>
+            <label class="space-between" >Actuator Name<input name=name type="text"></label> \
+            <label class="space-between" >Camera Distance<input name=cameraDistance type="text"></label><div style="height: 10px"></div>
+            <label class="space-between" >Actuator Detection Trash Label<select name=activationTrashLabel><option value="Person">Person</option><option value="Metal">Metal</option></select></label><div style="height: 10px"></div>
+            <label class="space-between" >Actuator Calibration Time<input type="number" value=0 name="actuatorCalibration" /></label><div style="height: 10px"></div>
+            <label class="space-between" >Actuator Type<select name=type><option value="COMPRESSED_AIR">Compressed Air</option></select></label><div style="height: 10px"></div>
+            </actuator>`
+            
+            const template = document.createElement('template');
+            template.innerHTML = actuator;
+            const result = template.content.children
+            console.log(...result);
+            acutatorBlock.append(...result)
+        }
+
+    </script>
+
+
+</body>
+</html>

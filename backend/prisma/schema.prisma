@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Algorithm {
+  ARGON2
+  BCRYPT
+  SCRYPT
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum ActuatorType {
+  COMPRESSED_AIR
+}
+
+model User {
+  userId       Int       @id @default(autoincrement())
+  username     String    @unique
+  passwordHash String
+  salt         String
+  algorithm    Algorithm
+  role         Role
+}
+
+model OperationSection {
+  operationSectionId    Int                    @id @default(autoincrement())
+  name                  String                 @unique
+  detectionMinThreshold Float                  @default(0.50)
+  cameraPictureWidthMm  Float                  @default(180.0)
+  conveyerSpeed         Float
+  cameraXThreshold      Int
+  aiId                  Int
+  ai                    ArtificialIntelligence @relation(fields: [aiId], references: [aiId])
+  actuators             Actuator[]
+}
+
+model Actuator {
+  actuatorId           Int              @id @default(autoincrement())
+  name                 String
+  type                 ActuatorType
+  cameraDistance       Float
+  actuatorCalibration  Float            @default(0.0)
+  activationTrashLabel Json
+  operationSectionId   Int
+  operationSection     OperationSection @relation(fields: [operationSectionId], references: [operationSectionId], onDelete: Cascade)
+}
+
+model Camera {
+  cameraId         Int    @id @default(autoincrement())
+  name             String
+  cameraXTrashhold BigInt
+}
+
+model ArtificialIntelligence {
+  aiId              Int                @id @default(autoincrement())
+  name              String             @unique
+  detectionLabels   Json
+  operationSections OperationSection[]
+}

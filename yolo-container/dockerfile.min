@@ -1,0 +1,11 @@
+FROM ultralytics/ultralytics:latest
+
+RUN pip install flask waitress
+
+WORKDIR /app
+
+ADD . /app/
+
+EXPOSE 8080
+
+ENTRYPOINT [ "python3", "backend.py" ]

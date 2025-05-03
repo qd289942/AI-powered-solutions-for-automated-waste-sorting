@@ -1,0 +1,43 @@
+<mxfile host="65bd71144e">
+    <diagram id="fQh_Rywv2kJpBA0ormEc" name="Page-1">
+        <mxGraphModel dx="608" dy="292" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="13" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
+                    <mxGeometry x="267.5" y="117.5" width="290" height="245" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.devices.video_camera;rotation=90;" vertex="1" parent="1">
+                    <mxGeometry x="373" y="120" width="52" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.infographic.shadedTriangle;fillColor=#10739E;strokeColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="359" y="170" width="80" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="339" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="160" width="20" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;right=0;top=0;bottom=0;fillColor=none;routingCenterX=-0.5;" vertex="1" parent="1">
+                    <mxGeometry x="459" y="160" width="120" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="h" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="459" y="225" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=0;" vertex="1" parent="1">
+                    <mxGeometry x="359" y="345" width="20" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;top=0;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="290" width="80" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;right=0;top=0;bottom=0;fillColor=none;routingCenterX=-0.5;rotation=90;" vertex="1" parent="1">
+                    <mxGeometry x="395.75" y="260" width="9" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="w" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="371.25" y="286" width="60" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

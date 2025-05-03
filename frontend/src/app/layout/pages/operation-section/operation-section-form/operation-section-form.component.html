@@ -1,0 +1,116 @@
+<div [formGroup]="form" *ngIf="form">
+  <h4>Einsatzabschnitt</h4>
+  <div class="mb-3">
+    <label for="operation-section-name" class="form-label">Name</label>
+    <input id="operation-section-name" type="text" class="form-control" formControlName="name">
+    <app-validation-errors [control]="form.get('name')"></app-validation-errors>
+  </div>
+  <div class="mb-3">
+    <label for="operation-section-x-threshold" class="form-label">
+      X-Detektionsschwelle (px)
+      <app-info-button infoButtonText="Die X-Detektionsschwelle legt fest welchen Bereich die linke Kante der Bounding-Box überschritten haben muss damit ein Objekt erkannt wird"></app-info-button>
+    </label>
+    <input id="operation-section-x-threshold" type="number" min="0" step="1" class="form-control"
+           formControlName="cameraXThreshold">
+    <app-validation-errors [control]="form.get('cameraXThreshold')"></app-validation-errors>
+  </div>
+  <div class="mb-3">
+    <label for="operation-section-conveyor-band-speed" class="form-label">
+      Bandgeschwindigkeit (mm / min)
+      <app-info-button infoButtonText="Bandgeschwindigkeit welche für die Berechnung der Aktor-Auslösung verwendet wird"></app-info-button>
+    </label>
+    <input id="operation-section-conveyor-band-speed" type="number" min="0" step="1" class="form-control"
+           formControlName="conveyerSpeed">
+    <app-validation-errors [control]="form.get('conveyerSpeed')"></app-validation-errors>
+  </div>
+  <div class="mb-3">
+    <label for="operation-section-detection-threshold" class="form-label">
+      Minimale Konfidenz
+      <app-info-button
+        infoButtonText="Die minimale Konfidenz (Sicherheit der Erkennung) des KI-Modells muss überschritten werden damit ein Objekt erkannt wird"></app-info-button>
+    </label>
+    <input id="operation-section-detection-threshold" type="number" min="0.5" step="0.01" class="form-control"
+           formControlName="detectionMinThreshold">
+    <app-validation-errors [control]="form.get('detectionMinThreshold')"></app-validation-errors>
+  </div>
+  <div class="mb-3">
+    <label for="operation-section-detection-camera-picture-width-mm" class="form-label">
+      Kamerabildbreite (mm)
+      <app-info-button
+        infoButtonText="Bildbreite des zum Backend gesendeten Bildes in mm, wird für die Berechnung der Objektposition und des Aktor-Auslösezeitpunktes verwendet"></app-info-button>
+    </label>
+    <input id="operation-section-detection-camera-picture-width-mm" type="number" min="10" step="1" class="form-control"
+           formControlName="cameraPictureWidthMm">
+    <app-validation-errors [control]="form.get('cameraPictureWidthMm')"></app-validation-errors>
+  </div>
+  <div class="mb-3">
+    <label for="operation-section-ai-model" class="form-label">KI-Modell</label>
+    <select id="operation-section-ai-model" class="form-control" formControlName="aiId">
+      <option [ngValue]="ai.aiId" *ngFor="let ai of ais">{{ ai.name }}</option>
+    </select>
+  </div>
+  <h4>Aktoren</h4>
+  <div class="mb-3">
+    <app-validation-errors [control]="actuatorsFormArray"></app-validation-errors>
+  </div>
+  <div *ngFor="let actuatorForm of getActuators(); let i=index" [formGroup]="actuatorForm">
+    <div class="clearfix">
+      <h5 class="float-start">Aktor {{ i + 1 }}</h5>
+      <div class="float-end">
+        <button class="btn btn-danger" (click)="remoteActuator(i)"
+                [disabled]="actuatorsFormArray.controls.length === 1">Aktor entfernen
+        </button>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="actuator-{{i}}-name" class="form-label">Name</label>
+      <input id="actuator-{{i}}-name" type="text" class="form-control" formControlName="name">
+      <app-validation-errors [control]="actuatorForm.get('name')"></app-validation-errors>
+    </div>
+    <div class="mb-3">
+      <label for="actuator-{{i}}-camera-distance" class="form-label">
+        Kamera-Abstand (mm)
+        <app-info-button infoButtonText="Abstand zur Kamera in mm, gemessen von der X-Verschiebung des Kamerabildes wird bei entsprechender Label-Übereinstimmung mithilfe der Bandgeschwindigkeit der passende Auslösezeitpunkt berechnet"></app-info-button>
+      </label>
+      <input id="actuator-{{i}}-camera-distance" type="number" min="0" class="form-control"
+             formControlName="cameraDistance">
+      <app-validation-errors [control]="actuatorForm.get('cameraDistance')"></app-validation-errors>
+    </div>
+    <div class="mb-3">
+      <label for="actuator-{{i}}-actuator-calibration" class="form-label">
+        Auslöseverzögerung (s)
+        <app-info-button infoButtonText="Die Auslöseverzögerung verschiebt die Aktor-Auslösung um einen fixen Wert nach vorne (frühere Auslösung) oder nach hinten (spätere Auslösung) und wird in Sekundenbruchteilen angegeben"></app-info-button>
+      </label>
+      <input id="actuator-{{i}}-actuator-calibration" type="number" step="0.01"  class="form-control"
+             formControlName="actuatorCalibration">
+      <app-validation-errors [control]="actuatorForm.get('actuatorCalibration')"></app-validation-errors>
+    </div>
+    <div class="mb-3">
+      <label for="actuator-{{i}}-type" class="form-label">Typ</label>
+      <select id="actuator-{{i}}-type" class="form-control" formControlName="type">
+        <option value="COMPRESSED_AIR">Druckluft</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Aktivierungslabel</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'Bitte wählen Sie ein oder mehrere Labels für die Aktorauslösung'"
+        [settings]="dropdownSettings"
+        [data]="currentDetectionLabels"
+        formControlName="activationTrashLabel">
+      </ng-multiselect-dropdown>
+      <app-validation-errors [control]="actuatorForm.get('activationTrashLabel')"></app-validation-errors>
+    </div>
+  </div>
+  <div class="clearfix">
+    <div class="float-end">
+      <div class="btn btn-success" (click)="addActuator()">Weiteren Aktor hinzufügen</div>
+    </div>
+  </div>
+  <div class="clearfix mt-3">
+    <div class="float-end">
+      <button class="btn btn-success" (click)="save()" [ngClass]="{'button-fake-disabled': form.invalid}">Speichern
+      </button>
+    </div>
+  </div>
+</div>

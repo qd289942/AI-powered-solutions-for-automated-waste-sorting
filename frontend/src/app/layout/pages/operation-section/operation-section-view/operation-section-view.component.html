@@ -1,0 +1,87 @@
+<div *ngIf="operationSection" class="w-50">
+  <h3>Einsatzabschnitt {{ operationSection.name }}</h3>
+  <table class="table">
+    <tbody>
+    <tr>
+      <th>
+        X-Detektionsschwelle (px)
+        <app-info-button
+          infoButtonText="Die X-Detektionsschwelle legt fest welchen Bereich die linke Kante der Bounding-Box überschritten haben muss damit ein Objekt erkannt wird"></app-info-button>
+      </th>
+      <td>
+        {{operationSection.cameraXThreshold}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Bandgeschwindigkeit (mm / min)
+        <app-info-button
+          infoButtonText="Bandgeschwindigkeit welche für die Berechnung der Aktor-Auslösung verwendet wird"></app-info-button>
+      </th>
+      <td>
+        {{operationSection.conveyerSpeed}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Minimale Konfidenz
+        <app-info-button
+          infoButtonText="Die minimale Konfidenz (Sicherheit der Erkennung) des KI-Modells muss überschritten werden damit ein Objekt erkannt wird"></app-info-button>
+      </th>
+      <td>{{operationSection.detectionMinThreshold}}</td>
+    </tr>
+    <tr>
+      <th>
+        Kamerabildbreite (mm)
+        <app-info-button
+        infoButtonText="Bildbreite des zum Backend gesendeten Bildes in mm, wird für die Berechnung der Objektposition und des Aktor-Auslösezeitpunktes verwendet"></app-info-button>
+      </th>
+      <td>{{operationSection.cameraPictureWidthMm}}</td>
+    </tr>
+    <tr>
+      <th>KI-Modell</th>
+      <td>{{operationSection.ai.name}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h4>Aktoren ({{operationSection.actuators.length}})</h4>
+  <table class="table">
+    <tbody *ngFor="let actuator of operationSection.actuators">
+    <tr>
+      <th>Name</th>
+      <td>{{actuator.name}}</td>
+    </tr>
+    <tr>
+      <th>
+        Kamera-Abstand (mm)
+        <app-info-button
+          infoButtonText="Abstand zur Kamera in mm, gemessen von der X-Verschiebung des Kamerabildes wird bei entsprechender Label-Übereinstimmung mithilfe der Bandgeschwindigkeit der passende Auslösezeitpunkt berechnet"></app-info-button>
+      </th>
+      <td>
+        {{actuator.cameraDistance}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Auslöseverzögerung (s)
+        <app-info-button
+          infoButtonText="Die Auslöseverzögerung verschiebt die Aktor-Auslösung um einen fixen Wert nach vorne (frühere Auslösung) oder nach hinten (spätere Auslösung) und wird in Sekundenbruchteilen angegeben"></app-info-button>
+      </th>
+      <td>
+        {{actuator.actuatorCalibration}}
+      </td>
+    </tr>
+    <tr>
+      <th>Typ</th>
+      <td>Druckluft</td>
+    </tr>
+    <tr>
+      <th>Aktivierungslabels</th>
+      <td>
+        <span *ngFor="let label of actuator.activationTrashLabel" class="badge bg-secondary me-1">{{label}}</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

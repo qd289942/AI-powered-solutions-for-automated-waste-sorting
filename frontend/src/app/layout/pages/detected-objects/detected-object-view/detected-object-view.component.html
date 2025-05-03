@@ -1,0 +1,80 @@
+<div *ngIf="detectedObjectDetailSummary">
+  <h3>Objekt {{detectedObjectDetailSummary.key}}</h3>
+
+  <table class="table w-50">
+    <tbody>
+    <tr>
+      <th>Einsatzabschnitt</th>
+      <td>
+        <a routerLink="/operation-sections/view/{{operationSection.operationSectionId}}">{{operationSection.name}}</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Mehrheits-Klassifizierung</th>
+      <td><span class="badge bg-secondary">{{detectedObjectDetailSummary.most_common_class.buckets[0].key}} ({{detectedObjectDetailSummary.most_common_class.buckets[0].doc_count}})</span></td>
+    </tr>
+    <tr>
+      <th>Durchschnittliche Konfidenz</th>
+      <td>{{detectedObjectDetailSummary.average_detection_certainty.value | number:'1.4-4'}}</td>
+    </tr>
+    <tr>
+      <th>Erste Erkennung</th>
+      <td>{{detectedObjectDetailSummary.first_detection.value | europeanDatetime}}</td>
+    </tr>
+    <tr>
+      <th>Letzte Erkennung</th>
+      <td>{{detectedObjectDetailSummary.last_detection.value | europeanDatetime}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h4>Einzelne Detektionen</h4>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Klassifizierung</th>
+      <th scope="col">Konfidenz</th>
+      <th scope="col">Zeitpunkt</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let detectedObject of detectedObjectDetailSummary.top_hits_docs.hits.hits">
+      <th scope="row">{{detectedObject._id}}</th>
+      <th><span class="badge bg-secondary">{{detectedObject._source.detection_class}}</span></th>
+      <td>{{detectedObject._source.detection_certainty | number:'1.4-4'}}</td>
+      <td>{{detectedObject._source.detection_timestamp | europeanDatetime}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <div class="clearfix">
+    <div class="float-start">
+      <h4>Detektionsverlauf:</h4>
+    </div>
+    <div class="float-start ms-3">
+      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example" *ngIf="detectedObjectDetailSummary">
+        <button type="button" class="btn btn-secondary" [disabled]="isFirstDetectedObject()" (click)="showPreviousDetectedObjectsBoundingBox()">«&nbsp;Zurück</button>
+        <button type="button" class="btn btn-secondary" [disabled]="isLastDetectedObject()" (click)="showNextDetectedObjectsBoundingBox()">Vor&nbsp;»</button>
+      </div>
+    </div>
+    <div class="float-start ms-3">
+      <button class="btn btn-primary btn-sm" (click)="downloadImages()">
+        <fa-icon [icon]="faDownload"></fa-icon>
+        Bilder herunterladen
+      </button>
+    </div>
+    <div class="float-start ms-3 legend-wrapper">
+      <div class="square red float-start"></div>
+      <span class="legend">X-Detektionsschwelle <app-info-button infoButtonText="Die X-Detektionsschwelle legt fest welchen Bereich die linke Kante der Bounding-Box überschritten haben muss damit ein Objekt erkannt wird"></app-info-button></span>
+    </div>
+    <div class="float-start ms-3 legend-wrapper">
+      <div class="square blue float-start"></div>
+      <span class="legend">Bounding-Box</span>
+    </div>
+  </div>
+  <canvas width="1920" height="1080" class="w-75" style="border: 1px solid #000" #myCanvas></canvas>
+</div>
+

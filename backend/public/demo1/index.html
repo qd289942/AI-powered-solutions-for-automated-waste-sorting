@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YOLOv8 Object Detection</title>
+    <style>
+        canvas {
+            display:block;
+            border: 1px solid black;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body style="display: flex; flex-direction: column;  gap: 1rem;">
+    <p>
+        Demo 1 is used to test avaible AI models. You can enter a valid operationSectionId if you want to
+        use this demo in conjuntion with one or more Actuators. The actuators will be informed about the
+        specified trash-label, if detected by the ai.
+        If the operationSectionId is specified the selection of an AI-Model will be overwritten!
+        If you just want to test an AI-Model without an OperationSection you can leave the
+        operationSectionId input empty and select the desired AI Model.
+        If a file is seletected the file will be uploaded to the specified AI-Model, and the results will be
+        displayed on the canvas.
+        The batch size input should be at least 1, and speciefies how many times the image will be uploaded and
+        detected. This can be helpfull to check if the AI is faster in detecting images, that is has already seen.
+    </p>
+    <div style="display: flex; flex-direction: row; gap: 1rem">
+    <div style="display: flex; flex-direction: column; gap: 5px;">
+    
+        <input id="uploadInput" type="file"/>
+        <label for="jwt">Enter jwt</label>
+        <input id="jwt" type="text"/>
+        <p id="selectImageFileWarning" style="color: red;" hidden="true">Please select image file!</p>
+        <p>Select Model or OperationSection</p>
+        <label for="operationSectionId">Operation Section ID</label>
+        <input id="operationSectionId" type="number"/>
+        <label for="modelSelect">Select Model</label>
+        <select id="modelSelect">
+        </select>
+        <label for="batch">Batch size</label>
+        <input id="batch" type="number" value="1"/>
+        <button type="submit" id="detectButton">Detect</button>
+        <div id="batch-block" style="overflow-y: scroll; max-height: 500px;"></div>
+    </div>
+    <div style="display: flex; flex-grow: 1;">
+        <canvas></canvas>
+    </div>
+</div>
+    <script>
+        // Fetch available models from backend
+        const select = document.getElementById("modelSelect");
+        const operationSectionIdInput = document.getElementById("operationSectionId");
+        const batchSize = document.getElementById("batch")
+        const batchBlock = document.getElementById("batch-block")
+        const selectImageFileWarning = document.getElementById('selectImageFileWarning')
+        const defaultToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcyMTU2MDMzMX0.EybkZ55q2v8cneMy9yJra2ImX0O5M6EoeyOyIirfI5ZaBSoaP7uxCZzx1YMYyMooqllIity1h2GVsB7WNaSCWnr9UJmljVnFoKhEvsfCj5vzaDd7w0p5IBCe_f9HiX91zA8WHMlu1IvFvRN5A0BrmAKjt0Tu5jzA5qAfK52avLtDKwofE6Ulx7gcAXt-dvKfTH_kRj65JfHFCZ1nBwj0nSxi-yE-1dQYhPE7g3S_Y_z-EhsozmaZknVXxf5-tV76XfI0e-rzBXW6dvWCAitYBIgUMcCKlerAGyBWOGuXflmw0PrRczPXrVhQ5pvBDiqX7fJ-Uj4U-6hLryvqFgkdb1BEPRdZFGr43h7PtpR5_eWUScM1OB92ABPBXZhIK15Half8lKEhf1La0DwGJbCnlOwWk69Fkw5yxw7xEj00AKpN4sfn_ciLuUQVvkkO0xTVzO9vXfxohMGiwZ72Ea-X5mTZzXoVYcyBwzkH1g2h8OK5vZ9Nxixb86-NHicXhV4BeAsVdn8Atsb0tEIfvMFo7jwY79if5hKIjbUN7KgzKRkPdnROSqUKMSt3HAf_n-HpPKhNaEWF7C47qW7BMC99_t0e9dtNhQ74C1qLkdbJ4wOJ16IMPsmnIWr8ysIUm3GMawG15yofOwlUJQ0wKRiWaNqwfP2CIz2vOLRE-Q4ZZEA"
+        const jwt = document.getElementById('jwt')
+        jwt.value = defaultToken
+        
+
+        operationSectionIdInput.addEventListener('change', (event) => {
+            const operationSectionId = operationSectionIdInput.value
+
+            if(operationSectionId !== "") {
+                modelSelect.disabled = true
+            } else {
+                modelSelect.disabled = false;
+            }
+        })
+
+        fetch("/object-detection/").then(response => response.json()).then(models => {
+            models.forEach(model => {
+                const option = document.createElement("option");
+                option.value = model.aiIndex;
+                option.text = model.aiName;
+                select.appendChild(option);
+            });
+
+            select.value = models[0].aiIndex;
+        });
+
+        /**
+         * "Upload" button onClick handler: uploads selected 
+         * image file to backend, receives an array of
+         * detected objects and draws them on top of image
+         */
+        const input = document.getElementById("uploadInput");
+        const detectButton = document.getElementById("detectButton");
+
+        input.addEventListener('change', () => {
+            selectImageFileWarning.hidden = true    
+        })
+
+       detectButton.addEventListener("click",async(event) => {
+            event.preventDefault()
+            console.log("detect button clicked")
+         
+            const file = input.files[0];
+
+            if(file === null || file === undefined) {
+                selectImageFileWarning.hidden = false
+                return;
+            }
+
+            const data = new FormData();
+            data.append("image_file",file,"image_file");
+            
+            const operationSectionId = operationSectionIdInput.value
+
+            let destination = ""
+            if(operationSectionId != null && operationSectionId != "") {
+                data.append("operationSectionId", operationSectionId)
+                destination = `/object-detection/detect`
+            } else {
+                destination = `/object-detection/detect/${select.value}`
+            }
+
+
+            console.log(operationSectionId);
+            batchBlock.innerHTML = "";
+            for (let index = 0; index < batchSize.value; index++) {
+                const startTime = Date.now()
+                
+                const response = await fetch(destination,{
+                    method:"post",
+                    headers: {
+                        "authorization": jwt.value 
+                    },
+                    body:data
+                });
+
+                const predictions = await response.json();
+                console.log(predictions);
+                const endTime = Date.now()
+                const timeTaken = endTime - startTime
+                const batchRound = document.createElement('p');
+                batchRound.innerText = `Batchround ${index + 1} time taken: ${timeTaken}ms`
+                batchBlock.appendChild(batchRound)
+                draw_image_and_boxes(file,predictions);
+           
+           }
+         
+        
+       })
+
+
+
+     
+       /**
+       * Function draws the image from provided file
+       * and bounding boxes of detected objects on
+       * top of the image
+       * @param file Uploaded file object
+       * @param boxes Array of bounding boxes in format
+       * [{label, probability, [x,y,w,h]},...]
+       */
+       function draw_image_and_boxes(file,boxes) {
+          const img = new Image()
+          img.src = URL.createObjectURL(file);
+          img.onload = () => {
+              const canvas = document.querySelector("canvas");
+              canvas.width = img.width;
+              canvas.height = img.height;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(img,0,0);
+              ctx.strokeStyle = "#00FF00";
+              ctx.lineWidth = 3;
+              ctx.font = "18px serif";
+              boxes.forEach((prediction) => {
+                const label = prediction.predictionClass + " " + prediction.predictionScore.toFixed(2);
+                const [x, y, w, h] = prediction.bbox;
+                const objectCenterX = x + w / 2
+                const objectCenterY = y + h / 2
+                ctx.strokeRect(x,y,w,h);
+                ctx.fillStyle = "#00ff00";
+                const width = ctx.measureText(label).width;
+                ctx.fillRect(x,y,width+10,25);
+                ctx.fillStyle = "#000000";
+                ctx.fillText(label,x,y+18);
+                ctx.fillStyle = "#ff0000";
+                ctx.beginPath();
+                ctx.arc(objectCenterX, objectCenterY, 5, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.stroke();
+
+                
+                const viewCenter = prediction.imageWidth / 2
+                const height = img.height
+                ctx.beginPath();
+                ctx.moveTo(viewCenter, 0);
+                ctx.lineTo(viewCenter, height);
+                ctx.stroke();
+
+                const centerDistance = viewCenter - objectCenterX
+            
+                ctx.beginPath();
+                ctx.moveTo(objectCenterX, y + h / 2);
+                ctx.lineTo(viewCenter, y + h / 2);
+                ctx.stroke();
+
+                console.log(prediction.imageWidth)
+                const xRatio = 180 / prediction.imageWidth
+                const text = centerDistance + "px, " + (centerDistance * xRatio) + "mm"
+
+                const distanceWidthText = ctx.measureText(text).width;
+                ctx.fillText(text, objectCenterX + centerDistance / 2 - distanceWidthText / 2, objectCenterY-18);
+              });
+          }
+       }
+  </script>  
+</body>
+</html>
