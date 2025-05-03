@@ -19,7 +19,11 @@ werden, weswegen aus der Aufgabenstellung ein konkretes Vorgehen
 und Projektziel abgeleitet wurde, welches in den nachfolgenden Abschnitten
 beschrieben wird.
 
-![Förderband](./final-documentation/gfx/hardware/Plastik_Erkannt.png)
+Das Projekt zielte auf die Automatisierung von Mülltrennung und -entsorgung ab und wurde erfolgreich als wissenschaftliche Arbeit veröffentlicht: "Intelligente Abfallwirtschaft: KI-gestützte Lösungen für automatisierte Mülltrennung und -entsorgung", Forschungsergebnisse zur Informatik, Band 75, Hamburg 2025 (ISBN 978-3-339-14368-6 Print / 978-3-339-14369-3 eBook). 
+
+[Veröffentlichung](https://www.verlagdrkovac.de/978-3-339-14368-6.htm )
+
+![Förderband](./image/Plastik_Erkannt.png)
 
 ## Starten der Anwendung
 Zum starten der Anwendung folgen Sie bitte den Readme-Dokumenten des Frontends und des Backends
@@ -31,8 +35,10 @@ Zum starten der Anwendung folgen Sie bitte den Readme-Dokumenten des Frontends u
 Zu Demozwecken stehen die beiden Nutzer admin und user zur Verfügung.
 Die Passwörter entnehmen Sie bitte der env Datei des Backends.
 [env](./backend/.env)
-
+## Das vollständige Projekt-Demo
+Das vollständige Projekt-Demo ist unter folgendem Link verfügbar:
+[Video]https://drive.google.com/file/d/1swre4n_bvmbfQ7RDnxKk2m0LNGvAy1_f/view?usp=sharing
 
 ## Demo ohne Hardware
-
+Ein detaillierte Demo-Video ohne Hardwareeinsatz wurde von unserem Teammitglied Herrn Teusch aufgenommen und ist unter folgendem Link einsehbar:
 [Video](https://drive.google.com/file/d/1pbjZJ15CWwCAsQgvGXcbOX_87T2dLDAh/view)
